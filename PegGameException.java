@@ -9,8 +9,5 @@ public class PegGameException extends java.lang.Exception{
     public PegGameException(String message){
         this.message=message;
     }
-    public void test(){
-        
-    }
     
 }
