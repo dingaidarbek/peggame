@@ -10,17 +10,17 @@ public class ReadFile {
         try{
         File file = new File(path);
         Scanner scanner = new Scanner(file);
-        int size = scanner.nextInt();
+        int size = Integer.valueOf(scanner.nextLine()) + 1;
         PegGameBoard readedFile = new PegGameBoard(size);
 
         for (int row = 0; row < size; row++){
-            String readedLine = scanner.next();
+            String readedLine = scanner.nextLine();
             for (int col = 0; col < size; col++){
                 if (readedLine.charAt(col) == 'o'){
                     readedFile.setValue(row, col, 1);
                 }
                 else if (readedLine.charAt(col) == '.'){
-                    readedFile.setValue(row, col, 1);
+                    readedFile.setValue(row, col, 0);
                 }
             }
         }
