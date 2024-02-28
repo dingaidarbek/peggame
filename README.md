@@ -1,2 +1,2 @@
-# rit_peg_game
+# peggame
 The repository for RIT GCIS124 project "Peg Game"
