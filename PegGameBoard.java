@@ -1,6 +1,9 @@
 package peggame;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Collection;
+import java.util.Scanner;
 
 public class PegGameBoard implements PegGame {
     // setting variables
@@ -15,6 +18,7 @@ public class PegGameBoard implements PegGame {
         this.gameState = GameState.NOT_STARTED; /*beginning of the game --> no moves were made yet*/
     }
 
+    // Method to print the board as a String
     public String toString(){
         String stringTable = "";
         for (int i = 0; i < this.length; i++){
@@ -29,6 +33,19 @@ public class PegGameBoard implements PegGame {
             stringTable += "\n";
         }
         return stringTable;
+    }
+
+    public static void main(String[] args) throws FileNotFoundException {
+        ReadFile read = new ReadFile();
+        System.out.println(read.readFile("C:/Users/Dimash/repos/gcis124/peggame/boardExample.txt"));
+        File file = new File("C:/Users/Dimash/repos/gcis124/peggame/boardExample.txt");
+        Scanner scanner = new Scanner(file);
+        System.out.println(scanner.nextInt());
+        scanner.close();
+    }
+    // Method to set the value at the given coordinate (row, col)
+    public void setValue(int row, int col, int value){
+        this.gameBoard[row][col] = value;
     }
 
     // implementing the methods in the interface PegGame
