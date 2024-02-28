@@ -35,6 +35,15 @@ public class PegGameBoard implements PegGame {
         return stringTable;
     }
 
+    public static void main(String[] args) throws FileNotFoundException {
+        ReadFile read = new ReadFile();
+        System.out.println(read.readFile("C:/Users/Dimash/repos/gcis124/peggame/boardExample.txt"));
+        File file = new File("C:/Users/Dimash/repos/gcis124/peggame/boardExample.txt");
+        Scanner scanner = new Scanner(file);
+        //System.out.println(scanner.nextInt());
+        scanner.close();
+    }
+
     // Method to set the value at the given coordinate (row, col)
     public void setValue(int row, int col, int value){
         this.gameBoard[row][col] = value;
