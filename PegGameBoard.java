@@ -16,7 +16,7 @@ public class PegGameBoard implements PegGame {
 
     // constructor
     public PegGameBoard(int length){
-        this.length = length;
+        this.length = length + 1;
         this.gameBoard = new char[this.length][this.length]; /*we need a square board. Thus, numOfRows == numOfCols*/
         this.gameState = GameState.NOT_STARTED; /*beginning of the game --> no moves were made yet*/
     }
@@ -50,7 +50,8 @@ public class PegGameBoard implements PegGame {
 
     // Method that checks if there is a peg at this location on the board 
     public boolean isFull(int row, int column){
-        if(gameBoard[row][column] == '-')
+        char value = gameBoard[row][column];
+        if(value == '-')
             return false;
         return true;
     }
@@ -71,15 +72,15 @@ public class PegGameBoard implements PegGame {
                     if((isFull(row, column+2) == false) && (isFull(row, column+1) == true)){
                         possibleMoves.add(new Move(new Location(row, column),new Location(row, column+2)));
                     }
-                    if((isFull(row, column-2) == false) && (isFull(row, column-1) == true)){
+                    /**if((isFull(row, column-2) == false) && (isFull(row, column-1) == true)){
                         possibleMoves.add(new Move(new Location(row, column),new Location(row, column-2)));
-                    }
+                    }*/
                     if((isFull(row+2, column) == false) && (isFull(row+1, column) == true)){
                         possibleMoves.add(new Move(new Location(row, column),new Location(row+2, column)));
                     }
-                    if((isFull(row-2, column) == false) && (isFull(row-1, column-1) == true)){
+                    /**if((isFull(row-2, column) == false) && (isFull(row-1, column-1) == true)){
                         possibleMoves.add(new Move(new Location(row, column),new Location(row-2, column)));
-                    }
+                    }*/
                 }
         }
     // returning an array of posiible moves for a peg
@@ -91,7 +92,7 @@ public class PegGameBoard implements PegGame {
     @Override
     public GameState getGameState() {
         Collection<Move> possibleMoves = getPossibleMoves();
-        if(possibleMoves == null){
+         if(possibleMoves == null){
             return GameState.STALEMATE;
         }
         else{

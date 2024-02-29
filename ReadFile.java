@@ -10,7 +10,7 @@ public class ReadFile {
         try{
         File file = new File(path);
         Scanner scanner = new Scanner(file);
-        int size = Integer.valueOf(scanner.nextLine()) + 1;
+        int size = Integer.valueOf(scanner.nextLine());
         PegGameBoard readedFile = new PegGameBoard(size);
 
         for (int row = 0; row < size; row++){
