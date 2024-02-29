@@ -17,10 +17,10 @@ public class ReadFile {
             String readedLine = scanner.nextLine();
             for (int col = 0; col < size; col++){
                 if (readedLine.charAt(col) == 'o'){
-                    readedFile.setValue(row, col, 1);
+                    readedFile.setValue(row, col, 'o');
                 }
                 else if (readedLine.charAt(col) == '.'){
-                    readedFile.setValue(row, col, 0);
+                    readedFile.setValue(row, col, '-');
                 }
             }
         }
