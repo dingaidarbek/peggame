@@ -47,7 +47,7 @@ public class PegGameBoard implements PegGame {
 
     // Method that checks if there is a peg at this location on the board 
     public boolean isFull(int row, int column){
-        if(gameBoard[row][column] == 0)
+        if(gameBoard[row][column] == '-')
             return false;
         return true;
     }
