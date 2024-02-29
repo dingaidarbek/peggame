@@ -50,29 +50,56 @@ public class PegGameBoard implements PegGame {
         this.gameBoard[row][col] = value;
     }
 
-    public boolean hasApeg(int row, int column){
-        Location location=new Location(row, column);
-        if(location==null)
+
+    // Method that checks if there is a peg at this location on the board 
+    public boolean isFull(int row, int column){
+        if(gameBoard[row][column] == 0)
             return false;
         return true;
     }
 
 
-    // implementing the methods in the interface PegGame
+    /**implementing the methods in the interface PegGame*/
     @Override
     public Collection<Move> getPossibleMoves() {
+        // data structure that will containn all possible moves for the peg
         ArrayList<Move> possibleMoves= new ArrayList<Move>();
-        
-    }
+
+        for(int row=0; row < length; row++){
+            for(int column=0; column < length; column++){
+                // checking if there is a peg at the source location
+                if(isFull(row, column) == true){
+                
+                    // multiple scenarios where a move could be possible if the conditions are met
+                    if((isFull(row, column+2) == false) && (isFull(row, column+1) == true)){
+                        possibleMoves.add(new Move(new Location(row, column),new Location(row, column+2)));
+                    }
+                    if((isFull(row, column-2) == false) && (isFull(row, column-1) == true)){
+                        possibleMoves.add(new Move(new Location(row, column),new Location(row, column-2)));
+                    }
+                    if((isFull(row+2, column) == false) && (isFull(row+1, column) == true)){
+                        possibleMoves.add(new Move(new Location(row, column),new Location(row+2, column)));
+                    }
+                    if((isFull(row-2, column) == false) && (isFull(row-1, column-1) == true)){
+                        possibleMoves.add(new Move(new Location(row, column),new Location(row-2, column)));
+                    }
+                }
+        }
+    // returning an array of posiible moves for a peg
+    } return possibleMoves;
+}
+
+
 
     @Override
     public GameState getGameState() {
-        //
+        if
     }
 
     @Override
     public void makeMove(Move move) throws PegGameException {
-        //
+        
+       
     }
 
 
