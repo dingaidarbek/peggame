@@ -2,6 +2,7 @@ package peggame;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Scanner;
 
@@ -49,21 +50,28 @@ public class PegGameBoard implements PegGame {
         this.gameBoard[row][col] = value;
     }
 
+    public boolean hasApeg(int row, int column){
+        Location location=new Location(row, column);
+        if(location==null)
+            return false;
+        return true;
+    }
+
+
     // implementing the methods in the interface PegGame
     @Override
     public Collection<Move> getPossibleMoves() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getPossibleMoves'");
+        ArrayList<Move> possibleMoves= new ArrayList<Move>();
+        
     }
 
     @Override
     public GameState getGameState() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'getGameState'");
+        //
     }
 
     @Override
-    public void makeMove() throws PegGameException {
+    public void makeMove(Move move) throws PegGameException {
         //
     }
 
