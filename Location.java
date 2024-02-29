@@ -13,7 +13,7 @@ public class Location {
     public int getCol(){return col;}
 
     public String toString(){
-        return "Peg is at row: " + row + ", and column: " + col;
+        return "row: " + row + " column: " + col;
     }
 
     public boolean equals(Object o){

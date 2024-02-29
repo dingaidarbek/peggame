@@ -13,9 +13,9 @@ public class ReadFile {
         int size = Integer.valueOf(scanner.nextLine());
         PegGameBoard readedFile = new PegGameBoard(size);
 
-        for (int row = 0; row < size; row++){
+        for (int row = 0; row <= size; row++){
             String readedLine = scanner.nextLine();
-            for (int col = 0; col < size; col++){
+            for (int col = 0; col <= size; col++){
                 if (readedLine.charAt(col) == 'o'){
                     readedFile.setValue(row, col, 'o');
                 }

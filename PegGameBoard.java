@@ -63,8 +63,8 @@ public class PegGameBoard implements PegGame {
         // data structure that will containn all possible moves for the peg
         ArrayList<Move> possibleMoves= new ArrayList<Move>();
 
-        for(int row=0; row < length; row++){
-            for(int column=0; column < length; column++){
+        for(int row=0; row < this.length - 2; row++){
+            for(int column=0; column < this.length - 2; column++){
                 // checking if there is a peg at the source location
                 if(isFull(row, column) == true){
                 
@@ -83,8 +83,9 @@ public class PegGameBoard implements PegGame {
                     }*/
                 }
         }
-    // returning an array of posiible moves for a peg
-    } return possibleMoves;
+    } 
+    // returning an array of possible moves for a peg
+    return possibleMoves;
 }
 
 
