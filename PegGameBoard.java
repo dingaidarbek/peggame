@@ -87,7 +87,7 @@ public class PegGameBoard implements PegGame {
 
     @Override
     public GameState getGameState() {
-        if
+        //
     }
 
     @Override
