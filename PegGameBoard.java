@@ -10,7 +10,8 @@ public class PegGameBoard implements PegGame {
     private int length;
     private char[][] gameBoard;
     private GameState gameState;
-    private Move[] possibleMoves;
+   
+
      
 
     // constructor
@@ -89,11 +90,21 @@ public class PegGameBoard implements PegGame {
 
     @Override
     public GameState getGameState() {
+        Collection<Move> possibleMoves = getPossibleMoves();
+        if(possibleMoves == null){
+            return GameState.STALEMATE;
+        }
+        else{
+            return GameState.IN_PROGRESS;
+        }
     }
 
 
     @Override
     public void makeMove(Move move) throws PegGameException {
+        // collection of possible moves to check if our move is valid
+        Collection<Move> possibleMoves = getPossibleMoves();
+
         // getting inputs for the locations
         Scanner myscanner=new Scanner(System.in);
         System.out.println("Enter the numbers for the row and column of the peg that you would like to move: ");
