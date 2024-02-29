@@ -89,10 +89,6 @@ public class PegGameBoard implements PegGame {
 
     @Override
     public GameState getGameState() {
-        if(possibleMoves == null){
-            return GameState.STALEMATE;
-        } 
-        else if()
     }
 
 
@@ -100,17 +96,15 @@ public class PegGameBoard implements PegGame {
     public void makeMove(Move move) throws PegGameException {
         // getting inputs for the locations
         Scanner myscanner=new Scanner(System.in);
-        System.out.println("Enter the number of row for the peg that you would like to move: ");
+        System.out.println("Enter the numbers for the row and column of the peg that you would like to move: ");
         int srcRow=myscanner.nextInt();
-        System.out.println("Enter the number of column for the peg that you would like to move: ");
         int srcColumn=myscanner.nextInt();
-        System.out.println("Enter the row that you would like to move your peg to: ");
+        System.out.println("Enter the numbers for the row and column that you would like to move your peg to: ");
         int destRow=myscanner.nextInt();
-        System.out.println("Enter the column that you would like to move your peg to:  ");
         int destColumn=myscanner.nextInt();
         myscanner.close();
-        for(Move mov : possibleMoves){
-            if(move == mov){
+        for(Move possibleMove : possibleMoves){
+            if(move == possibleMove){
                 gameBoard[srcRow][srcColumn] = '-';
                 gameBoard[destRow-1][destColumn-1] = '-';
                 gameBoard[destRow][destColumn] = 'o';
