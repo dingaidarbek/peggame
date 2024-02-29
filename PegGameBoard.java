@@ -1,6 +1,5 @@
 package peggame;
 
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.Collection;
 import java.util.Scanner;
@@ -8,13 +7,13 @@ import java.util.Scanner;
 public class PegGameBoard implements PegGame {
     // setting variables
     private int length;
-    private int[][] gameBoard;
+    private char[][] gameBoard;
     private GameState gameState;
      
     // constructor
     public PegGameBoard(int length){
         this.length = length;
-        this.gameBoard = new int[this.length][this.length]; /*we need a square board. Thus, numOfRows == numOfCols*/
+        this.gameBoard = new char[this.length][this.length]; /*we need a square board. Thus, numOfRows == numOfCols*/
         this.gameState = GameState.NOT_STARTED; /*beginning of the game --> no moves were made yet*/
     }
 
@@ -23,12 +22,7 @@ public class PegGameBoard implements PegGame {
         String stringTable = "";
         for (int i = 0; i < this.length; i++){
             for (int j = 0; j < this.length; j++){
-                if (gameBoard[i][j] == 1){
-                    stringTable += "o";
-                }
-                else if (gameBoard[i][j] == 0){
-                    stringTable += "-";
-                }
+                stringTable += gameBoard[i][j];
             }
             stringTable += "\n";
         }
@@ -45,7 +39,7 @@ public class PegGameBoard implements PegGame {
     }
 
     // Method to set the value at the given coordinate (row, col)
-    public void setValue(int row, int col, int value){
+    public void setValue(int row, int col, char value){
         this.gameBoard[row][col] = value;
     }
 
