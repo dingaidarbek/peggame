@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Scanner;
 
-public class PegGameBoard implements PegGame {
+public class PegGameSquare implements PegGame {
     // setting variables
     private int length;
     private char[][] gameBoard;
@@ -15,7 +15,7 @@ public class PegGameBoard implements PegGame {
      
 
     // constructor
-    public PegGameBoard(int length){
+    public PegGameSquare(int length){
         this.length = length + 1;
         this.gameBoard = new char[this.length][this.length]; /*we need a square board. Thus, numOfRows == numOfCols*/
         this.gameState = GameState.NOT_STARTED; /*beginning of the game --> no moves were made yet*/

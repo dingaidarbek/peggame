@@ -13,7 +13,7 @@ public class Project1Main {
         System.out.println(read.readFile(path).getPossibleMoves());
         readPath.close();
 
-        PegGameBoard pegGame=new PegGameBoard(5);
+        PegGameSquare pegGame=new PegGameSquare(5);
         System.out.println(pegGame.getPossibleMoves());
         
 

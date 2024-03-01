@@ -6,12 +6,12 @@ import java.util.Scanner;
 
 public class ReadFile {
 
-    public PegGameBoard readFile(String path) throws FileNotFoundException{
+    public PegGameSquare readFile(String path) throws FileNotFoundException{
         try{
         File file = new File(path);
         Scanner scanner = new Scanner(file);
         int size = Integer.valueOf(scanner.nextLine());
-        PegGameBoard readedFile = new PegGameBoard(size);
+        PegGameSquare readedFile = new PegGameSquare(size);
 
         for (int row = 0; row <= size; row++){
             String readedLine = scanner.nextLine();
@@ -28,7 +28,7 @@ public class ReadFile {
         return readedFile;
     }
     catch (FileNotFoundException e){
-        return new PegGameBoard(0);
+        return new PegGameSquare(0);
     }
     }
     
