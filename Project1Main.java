@@ -11,6 +11,7 @@ public class Project1Main {
         String path = readPath.nextLine();
         PegGame game = read.readFile(path);
         PegGameCLI.startGame(game);
+        System.out.println(game.getGameState());
         readPath.close();
     }
 

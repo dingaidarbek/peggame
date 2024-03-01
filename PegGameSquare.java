@@ -54,7 +54,10 @@ public class PegGameSquare implements PegGame {
     // Method that checks if there is a peg at this location on the board 
     public boolean isFull(int row, int column){
         return gameBoard[row][column] == 'o';
+          
     }
+
+ 
 
 
     /**implementing the methods in the interface PegGame*/
@@ -95,10 +98,14 @@ public class PegGameSquare implements PegGame {
 
 
 
+
     @Override
     public GameState getGameState() {
         Collection<Move> possibleMoves = getPossibleMoves();
-         if(possibleMoves == null){
+        if(pegsLeft() == 1){
+            return GameState.WON;
+        }
+        if(possibleMoves == null){
             return GameState.STALEMATE;
         }
         else{
@@ -139,14 +146,18 @@ public class PegGameSquare implements PegGame {
             System.out.println("Impossible move.");
         }
     }
+
+
     public boolean moveIsPossible(Move move){
         Collection<Move> possibleMoves = getPossibleMoves();
         return possibleMoves.contains(move);
     }
 
+
     public void setGameState(GameState gameState){
         this.gameState = gameState;
     }
+
 
     public int pegsLeft(){
         int numberOfPegs = 0;
