@@ -13,7 +13,7 @@ public class Move{
     public Location getTo(){return to;}
 
     public String toString(){
-        return "Peg moved from " + from + " to " + to;
+        return "Peg moves from " + from + " to " + to;
     }
 
     public boolean equals(Object o){

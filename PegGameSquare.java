@@ -10,9 +10,7 @@ public class PegGameSquare implements PegGame {
     private int length;
     private char[][] gameBoard;
     private GameState gameState;
-   
 
-     
 
     // constructor
     public PegGameSquare(int length){
@@ -55,37 +53,39 @@ public class PegGameSquare implements PegGame {
 
     // Method that checks if there is a peg at this location on the board 
     public boolean isFull(int row, int column){
-        char value = gameBoard[row][column];
-        if(value == '-')
-            return false;
-        return true;
+        return gameBoard[row][column] == 'o';
     }
 
 
     /**implementing the methods in the interface PegGame*/
     @Override
     public Collection<Move> getPossibleMoves() {
-        // data structure that will containn all possible moves for the peg
+        // data structure that will contain all possible moves for the peg
         ArrayList<Move> possibleMoves= new ArrayList<Move>();
-
-        for(int row=0; row < this.length - 2; row++){
-            for(int column=0; column < this.length - 2; column++){
+        
+        for(int row=0; row < this.length; row++){
+            for(int column=0; column < this.length; column++){
+                try{
                 // checking if there is a peg at the source location
                 if(isFull(row, column) == true){
                 
                     // multiple scenarios where a move could be possible if the conditions are met
-                    if((isFull(row, column+2) == false) && (isFull(row, column+1) == true)){
+                    if((isFull(row, column+2) == false) && (isFull(row, column+1) == true)){ // Move from left to right
                         possibleMoves.add(new Move(new Location(row, column),new Location(row, column+2)));
                     }
-                    /**if((isFull(row, column-2) == false) && (isFull(row, column-1) == true)){
+                    if((isFull(row, column-2) == false) && (isFull(row, column-1) == true)){ // Move right to left
                         possibleMoves.add(new Move(new Location(row, column),new Location(row, column-2)));
-                    }*/
-                    if((isFull(row+2, column) == false) && (isFull(row+1, column) == true)){
+                    }
+                    if((isFull(row+2, column) == false) && (isFull(row+1, column) == true)){ // Move from up to down
                         possibleMoves.add(new Move(new Location(row, column),new Location(row+2, column)));
                     }
-                    /**if((isFull(row-2, column) == false) && (isFull(row-1, column-1) == true)){
+                    if((isFull(row-2, column) == false) && (isFull(row-1, column) == true)){ // Move from down to up
                         possibleMoves.add(new Move(new Location(row, column),new Location(row-2, column)));
-                    }*/
+                    }
+                }
+            }
+                catch (IndexOutOfBoundsException e){
+                    // Skip if there is no such coordinate
                 }
         }
     } 
@@ -102,34 +102,61 @@ public class PegGameSquare implements PegGame {
             return GameState.STALEMATE;
         }
         else{
-            return GameState.IN_PROGRESS;
+            return this.gameState;
         }
     }
 
 
     @Override
     public void makeMove(Move move) throws PegGameException {
-        // collection of possible moves to check if our move is valid
-        Collection<Move> possibleMoves = getPossibleMoves();
-
-        // getting inputs for the locations
-        Scanner myscanner=new Scanner(System.in);
-        System.out.println("Enter the numbers for the row and column of the peg that you would like to move: ");
-        int srcRow=myscanner.nextInt();
-        int srcColumn=myscanner.nextInt();
-        System.out.println("Enter the numbers for the row and column that you would like to move your peg to: ");
-        int destRow=myscanner.nextInt();
-        int destColumn=myscanner.nextInt();
-        myscanner.close();
-        for(Move possibleMove : possibleMoves){
-            if(move == possibleMove){
-                gameBoard[srcRow][srcColumn] = '-';
-                gameBoard[destRow-1][destColumn-1] = '-';
-                gameBoard[destRow][destColumn] = 'o';
+        if (moveIsPossible(move)){
+            if(move.getFrom().getRow() == move.getTo().getRow()){ // Peg moves in the same row
+                if (move.getFrom().getCol() - move.getTo().getCol() < 0){ // Peg moves from left to right
+                    gameBoard[move.getFrom().getRow()][move.getFrom().getCol()] = '-';
+                    gameBoard[move.getTo().getRow()][move.getTo().getCol()-1] = '-';
+                    gameBoard[move.getTo().getRow()][move.getTo().getCol()] = 'o';
+                }
+                else if (move.getFrom().getCol() - move.getTo().getCol() > 0){ // If we move from right to left
+                    gameBoard[move.getFrom().getRow()][move.getFrom().getCol()] = '-';
+                    gameBoard[move.getTo().getRow()][move.getTo().getCol()+1] = '-';
+                    gameBoard[move.getTo().getRow()][move.getTo().getCol()] = 'o';
+                }
+            }
+            else if (move.getFrom().getCol() == move.getTo().getCol()){ // Peg moves in the same column
+                if (move.getFrom().getRow() - move.getTo().getRow() < 0){ // Peg moves from up to down
+                    gameBoard[move.getFrom().getRow()][move.getFrom().getCol()] = '-';
+                    gameBoard[move.getTo().getRow()-1][move.getTo().getCol()] = '-';
+                    gameBoard[move.getTo().getRow()][move.getTo().getCol()] = 'o';
+                }
+                else if (move.getFrom().getRow() - move.getTo().getRow() > 0){ // Peg moves from down to up
+                    gameBoard[move.getFrom().getRow()][move.getFrom().getCol()] = '-';
+                    gameBoard[move.getTo().getRow()+1][move.getTo().getCol()] = '-';
+                    gameBoard[move.getTo().getRow()][move.getTo().getCol()] = 'o';
+                }
             }
         }
-
-       
+        else{
+            System.out.println("Impossible move.");
+        }
+    }
+    public boolean moveIsPossible(Move move){
+        Collection<Move> possibleMoves = getPossibleMoves();
+        return possibleMoves.contains(move);
     }
 
+    public void setGameState(GameState gameState){
+        this.gameState = gameState;
+    }
+
+    public int pegsLeft(){
+        int numberOfPegs = 0;
+        for (int i = 0; i < this.length; i++){
+            for (int j = 0; j < this.length; j++){
+                if (gameBoard[j][i] == 'o'){
+                    numberOfPegs++;
+                }
+            }
+        }
+        return numberOfPegs;
+    }
 }

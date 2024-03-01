@@ -9,14 +9,9 @@ public class Project1Main {
         Scanner readPath = new Scanner(System.in);
         System.out.println("Please, enter the path of the file: ");
         String path = readPath.nextLine();
-        System.out.println(read.readFile(path));
-        System.out.println(read.readFile(path).getPossibleMoves());
+        PegGame game = read.readFile(path);
+        PegGameCLI.startGame(game);
         readPath.close();
-
-        PegGameSquare pegGame=new PegGameSquare(5);
-        System.out.println(pegGame.getPossibleMoves());
-        
-
     }
 
   // C:\Users\Dimash\repos\gcis124\peggame\boardExample.txt

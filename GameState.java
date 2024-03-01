@@ -2,8 +2,8 @@ package peggame;
 
 public enum GameState {
     NOT_STARTED("No moves have been made yet!"),
-    IN_PROGRESS("at least one move has been made and game has not ended yet."),
-    STALEMATE("two or more pegs are remaining on the board, but there are no more valid moves."),
+    IN_PROGRESS("At least one move has been made and game has not ended yet."),
+    STALEMATE("Two or more pegs are remaining on the board, but there are no more valid moves."),
     WON("Victory!");
 
     private String description;
