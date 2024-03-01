@@ -23,12 +23,17 @@ public class PegGameSquare implements PegGame {
 
     // Method to print the board as a String
     public String toString(){
-        String stringTable = "";
+        String stringTable = "[#]";
         for (int i = 0; i < this.length; i++){
+            stringTable +=  "  [" + i + "]";
+        }
+        stringTable += "\n\n";
+        for (int i = 0; i < this.length; i++){
+            stringTable += "[" + i + "]   ";
             for (int j = 0; j < this.length; j++){
-                stringTable += gameBoard[i][j];
+                stringTable += gameBoard[i][j] + "    ";
             }
-            stringTable += "\n";
+            stringTable += "\n\n";
         }
         return stringTable;
     }

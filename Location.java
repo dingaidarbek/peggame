@@ -13,7 +13,7 @@ public class Location {
     public int getCol(){return col;}
 
     public String toString(){
-        return "row: " + row + " column: " + col;
+        return "(row" + row + ", col" + col + ")";
     }
 
     public boolean equals(Object o){
