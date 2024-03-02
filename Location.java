@@ -19,11 +19,9 @@ public class Location {
     public boolean equals(Object o){
         if(!(o instanceof Location)){
             return false;
-        } else {
-            Location castedobject=(Location)(o);
-            return (row == castedobject.row) && (col == castedobject.col);
         }
-    
+        Location castedobject=(Location)(o);
+        return ((this.row == castedobject.getRow()) && (this.col == castedobject.getCol()));
     }
        
       

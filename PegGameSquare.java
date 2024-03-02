@@ -65,33 +65,39 @@ public class PegGameSquare implements PegGame {
         
         for(int row=0; row < this.length; row++){
             for(int column=0; column < this.length; column++){
-                try{
                 // checking if there is a peg at the source location
                 if(isFull(row, column) == true){
-                
-                    // multiple scenarios where a move could be possible if the conditions are met
-                    if((isFull(row, column+2) == false) && (isFull(row, column+1) == true)){ // Move from left to right
-                        possibleMoves.add(new Move(new Location(row, column),new Location(row, column+2)));
+                    try{
+                        // multiple scenarios where a move could be possible if the conditions are met
+                        if((isFull(row, column+2) == false) && (isFull(row, column+1) == true)){ // Move from left to right
+                            possibleMoves.add(new Move(new Location(row, column),new Location(row, column+2)));
+                        }
                     }
-                    if((isFull(row, column-2) == false) && (isFull(row, column-1) == true)){ // Move right to left
-                        possibleMoves.add(new Move(new Location(row, column),new Location(row, column-2)));
+                    catch (IndexOutOfBoundsException e){}
+                    try{
+                        if((isFull(row, column-2) == false) && (isFull(row, column-1) == true)){ // Move right to left
+                            possibleMoves.add(new Move(new Location(row, column),new Location(row, column-2)));
+                        }
                     }
-                    if((isFull(row+2, column) == false) && (isFull(row+1, column) == true)){ // Move from up to down
-                        possibleMoves.add(new Move(new Location(row, column),new Location(row+2, column)));
+                    catch (IndexOutOfBoundsException e) {}
+                    try{
+                        if((isFull(row+2, column) == false) && (isFull(row+1, column) == true)){ // Move from up to down
+                            possibleMoves.add(new Move(new Location(row, column),new Location(row+2, column)));
+                        }
                     }
-                    if((isFull(row-2, column) == false) && (isFull(row-1, column) == true)){ // Move from down to up
-                        possibleMoves.add(new Move(new Location(row, column),new Location(row-2, column)));
+                    catch (IndexOutOfBoundsException e){}
+                    try{
+                        if((isFull(row-2, column) == false) && (isFull(row-1, column) == true)){ // Move from down to up
+                            possibleMoves.add(new Move(new Location(row, column),new Location(row-2, column)));
+                        }
                     }
+                    catch (IndexOutOfBoundsException e){}
                 }
             }
-                catch (IndexOutOfBoundsException e){
-                    // Skip if there is no such coordinate
-                }
-        }
-    } 
+        } 
     // returning an array of possible moves for a peg
     return possibleMoves;
-}
+    }
 
 
 
