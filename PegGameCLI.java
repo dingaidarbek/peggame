@@ -11,7 +11,10 @@ public class PegGameCLI {
         do{
             System.out.println("Game state: " + game.getGameState());
             System.out.println(game);
-            if (game.getPossibleMoves().size() != 0){
+            if (game.getPossibleMoves().size() == 0){
+                havePossibleMoves = false;
+            }
+            else if (game.getPossibleMoves().size() != 0){
                 System.out.println("\nPossible moves:\n" + game.getPossibleMoves());
                 userInput = scanner.next();
                 if (userInput.equals("quit")){ // If user types "quit", game ends
@@ -44,7 +47,6 @@ public class PegGameCLI {
                     System.out.println("Game state: " + game.getGameState());
                     System.out.println(game);
                 }
-                havePossibleMoves = false;
             }
         }
         while (!(quit) && (havePossibleMoves)); 

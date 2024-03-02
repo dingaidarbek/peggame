@@ -100,12 +100,14 @@ public class PegGameSquare implements PegGame {
     }
 
 
-
     @Override
     public GameState getGameState() {
         Collection<Move> possibleMoves = getPossibleMoves();
-         if(possibleMoves == null){
+         if((possibleMoves.size() == 0) && (pegsLeft() > 1)){
             return GameState.STALEMATE;
+        }
+        else if ((possibleMoves.size() == 0) && (pegsLeft() == 1)){
+            return GameState.WON;
         }
         else{
             return this.gameState;
@@ -145,14 +147,18 @@ public class PegGameSquare implements PegGame {
             System.out.println("Impossible move.");
         }
     }
+
+
     public boolean moveIsPossible(Move move){
         Collection<Move> possibleMoves = getPossibleMoves();
         return possibleMoves.contains(move);
     }
 
+
     public void setGameState(GameState gameState){
         this.gameState = gameState;
     }
+
 
     public int pegsLeft(){
         int numberOfPegs = 0;
