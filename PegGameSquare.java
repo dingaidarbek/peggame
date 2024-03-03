@@ -1,9 +1,7 @@
 package peggame;
 
-import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Scanner;
 
 public class PegGameSquare implements PegGame {
     // setting variables
@@ -14,7 +12,7 @@ public class PegGameSquare implements PegGame {
 
     // constructor
     public PegGameSquare(int length){
-        this.length = length + 1;
+        this.length = length + 1; // Pegs are numbered starting from 0
         this.gameBoard = new char[this.length][this.length]; /*we need a square board. Thus, numOfRows == numOfCols*/
         this.gameState = GameState.NOT_STARTED; /*beginning of the game --> no moves were made yet*/
     }
@@ -34,15 +32,6 @@ public class PegGameSquare implements PegGame {
             stringTable += "\n\n";
         }
         return stringTable;
-    }
-
-    public static void main(String[] args) throws FileNotFoundException {
-        ReadFile read = new ReadFile();
-        Scanner readPath = new Scanner(System.in);
-        System.out.println("Please, enter the path of the file: ");
-        String path = readPath.nextLine();
-        System.out.println(read.readFile(path));
-        readPath.close();
     }
 
     // Method to set the value at the given coordinate (row, col)
@@ -124,6 +113,7 @@ public class PegGameSquare implements PegGame {
     }
 
 
+    // Accessor for this.gameState private variable
     @Override
     public GameState getGameState() {
         return this.gameState;
@@ -133,15 +123,14 @@ public class PegGameSquare implements PegGame {
     @Override
     public void makeMove(Move move) throws PegGameException {
         if (moveIsPossible(move)){
-            this.setGameState(GameState.IN_PROGRESS);
+            this.setGameState(GameState.IN_PROGRESS); // If move is possible, make the move and setGameState to "IN_PROGRESS"
             gameBoard[move.getFrom().getRow()][move.getFrom().getCol()] = '-'; // At the "from" coordinate an empty space created
             gameBoard[move.getTo().getRow()][move.getTo().getCol()] = 'o'; // At the "to" coordinate peg created
 
             // We need to set an empty space between "from" and "to" coordinates:
 
-            // if(move.getFrom().getRow() - move.getTo().getRow() == 0){ // Peg moves in the same row
                 switch(move.getFrom().getRow() - move.getTo().getRow()){
-                    case 0:
+                    case 0: // Peg moves in the same row
                         switch(move.getFrom().getCol() - move.getTo().getCol()){
                             case -2: // Peg moves from left to right
                                 gameBoard[move.getFrom().getRow()][move.getFrom().getCol()+1] = '-';
@@ -151,9 +140,9 @@ public class PegGameSquare implements PegGame {
                                 break;
                         }
                         break;
-                    case 2:
+                    case 2: // Peg moves up
                         switch(move.getFrom().getCol() - move.getTo().getCol()){
-                            case 0:
+                            case 0: // Peg moves straight up
                                 gameBoard[move.getFrom().getRow()-1][move.getFrom().getCol()] = '-';
                                 break;
                             case -2: // Peg moves diagonally up and right
@@ -164,9 +153,9 @@ public class PegGameSquare implements PegGame {
                                 break;
                         }
                         break;
-                    case -2:
+                    case -2: // Peg moves down
                         switch(move.getFrom().getCol() - move.getTo().getCol()){
-                            case 0:
+                            case 0: // Peg moves straight down
                             gameBoard[move.getFrom().getRow()+1][move.getFrom().getCol()] = '-';
                                 break;
                             case -2:// Peg moves diagonally down and right
@@ -179,23 +168,23 @@ public class PegGameSquare implements PegGame {
                         break;
                 }
             }
-            else{
+            else{ // If move is impossible, throw exception
                 throw new PegGameException("Impossible move");
             }
     }
 
-
+    // Check if move is possible by checking: (Move is in possibleMoves collection)
     public boolean moveIsPossible(Move move){
         Collection<Move> possibleMoves = getPossibleMoves();
         return possibleMoves.contains(move);
     }
 
-
+    // Mutator for this.gameState private variable
     public void setGameState(GameState gameState){
         this.gameState = gameState;
     }
 
-
+    // Counts how many pegs are left on the board
     public int pegsLeft(){
         int numberOfPegs = 0;
         for (int i = 0; i < this.length; i++){
