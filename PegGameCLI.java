@@ -4,13 +4,19 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class PegGameCLI {
+    /**
+     * The class contains one method startGame(PegGame game) and enables the user to type the commands in to play the game;
+     * @param game 
+     * @exception PegGameException if move is invalid or impossible to make.
+     * @exception InputMismatchException inappropriate format for the command was given.
+     */
     public static void startGame(PegGame game){
         // Setting down the CLI
         Scanner scanner = new Scanner(System.in);
         boolean quit = false;
         String userInput;
 
-        while (!(quit) && (game.getPossibleMoves().size() != 0)){ // Game is played until there are possible moves or user types "quit"
+        while (!(quit) && (game.getPossibleMoves().size() != 0)){ // Game is played until there are no possible moves or user types "quit"
             System.out.println("Game state: " + game.getGameState()); // Print the gameState
             System.out.println(game); // Print the board
                 // System.out.println("\nPossible moves:\n" + game.getPossibleMoves());

@@ -5,7 +5,6 @@ package peggame;
  * @param row an int variable to specify a row on the board
  * @param col an int variable to specify a column on the board
  */
-
 public class Location {
     private int row;
     private int col;
