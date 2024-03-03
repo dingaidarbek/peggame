@@ -1,4 +1,12 @@
 package peggame;
+/**
+ * Enumeration class that contains possible game state of The Peg Game.
+ * 
+ * This enum class contains a constructor that takes one parameter;
+ * @param description the description of each state of the game.
+ * 
+ * 
+*/
 
 public enum GameState {
     NOT_STARTED("No moves have been made yet!"),

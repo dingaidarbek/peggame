@@ -2,6 +2,14 @@ package peggame;
 
 import java.util.ArrayList;
 import java.util.Collection;
+/** An implementation of the PegGame interface. In addition to it containing helper methods to be able 
+ * to implement those methods.
+ * There are thee global variables which are the length of the board (because it is a square board rows == columns).
+ * along with a 2D array to create the gameBoard and the gameState.
+ * 
+ * The constructor takes one parameter:
+ * @param length an int that determines the size of the square board (rows==cols)
+ */
 
 public class PegGameSquare implements PegGame {
     // setting variables
@@ -50,6 +58,14 @@ public class PegGameSquare implements PegGame {
 
 
     /**implementing the methods in the interface PegGame*/
+
+    /**
+     * The method getPossibleMoves() takes no parameters and returns the possible moves for a peg in all possible directions;
+     * we used an ArrayList as the data structure that will contain the possibe moves for a peg
+     * 
+     * @return an ArrayList of possible moves for a peg on the board.
+     * 
+     */
     @Override
     public Collection<Move> getPossibleMoves() {
         // data structure that will contain all possible moves for the peg
@@ -128,6 +144,13 @@ public class PegGameSquare implements PegGame {
         }
     }
 
+    /**
+     * The method makeMove(Move move) is used to move a peg from one location on the board to another;
+     * it takes one parameter and does not return anything.
+     * @param move the move that we want to make for a peg
+     * 
+     * @exception PegGameException if move is invalid
+     */
 
     @Override
     public void makeMove(Move move) throws PegGameException {

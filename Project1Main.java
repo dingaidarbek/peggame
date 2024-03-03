@@ -9,11 +9,6 @@ public class Project1Main {
         Scanner readPath = new Scanner(System.in);
         System.out.println("Please, enter the path of the file: ");
         String path = readPath.nextLine();
-<<<<<<< HEAD
-        PegGame game = read.readFile(path);
-        PegGameCLI.startGame(game);
-        System.out.println(game.getGameState());
-=======
         try{
           PegGame game = read.readFile(path);
           PegGameCLI.startGame(game);
@@ -21,7 +16,6 @@ public class Project1Main {
         catch (FileNotFoundException e){
           System.out.println("Please, enter correct path of the file.");
         }
->>>>>>> 03d863af884eaf8eedcefb6f3b30e9d2dc806e24
         readPath.close();
     }
 
