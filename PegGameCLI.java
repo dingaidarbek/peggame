@@ -1,5 +1,6 @@
 package peggame;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class PegGameCLI {
@@ -11,25 +12,26 @@ public class PegGameCLI {
         do{
             System.out.println("Game state: " + game.getGameState());
             System.out.println(game);
-            if (game.getPossibleMoves().size() == 0){
-                havePossibleMoves = false;
-            }
-            else if (game.getPossibleMoves().size() != 0){
-                System.out.println("\nPossible moves:\n" + game.getPossibleMoves());
+            if (game.getPossibleMoves().size() != 0){
+                // System.out.println("\nPossible moves:\n" + game.getPossibleMoves());
                 userInput = scanner.next();
                 if (userInput.equals("quit")){ // If user types "quit", game ends
                     quit = true;
                 }
                 else if (userInput.equals("move")){
                     if (game.getPossibleMoves().size() != 0){
+                    try{
                         int r1 = scanner.nextInt(), c1 = scanner.nextInt(), r2 = scanner.nextInt(), c2 = scanner.nextInt();
                         try{
                             game.makeMove(new Move(new Location(r1, c1), new Location(r2,c2)));
-                            game.setGameState(GameState.IN_PROGRESS);
                         }
                         catch (PegGameException e){
-                            System.out.println("Impossible move");
+                            System.out.println("Impossible move!");
                         }
+                    }
+                    catch(InputMismatchException e){
+                        System.out.println("Please, make sure that you type commands correctly. Possible commands:\n1. 'quit' - quit the game\n2. 'move r1 c1 r2 c2' - move a peg from Location (r1,c1) to Location (r2,c2)");
+                    }
                     }
                 }
                 else{
@@ -37,6 +39,7 @@ public class PegGameCLI {
                 }
             }
             else{
+                havePossibleMoves = false;
                 if (game.pegsLeft() == 1){
                     game.setGameState(GameState.WON);
                     System.out.println("Game state: " + game.getGameState());
