@@ -19,9 +19,8 @@ public class Move{
     public boolean equals(Object o){
         if(!(o instanceof Move)){
             return false;
-        } else {
-            Move castedobject=(Move)(o);
-            return (from.equals(castedobject.from)) && (to.equals(castedobject.to));
         }
+        Move castedobject = (Move)(o);
+        return ((this.from.equals(castedobject.getFrom())) && (this.to.equals(castedobject.getTo())));
     }
 }
