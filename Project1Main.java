@@ -4,7 +4,7 @@ import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Project1Main {
-    public static void main(String[] args) throws FileNotFoundException{
+    public static void main(String[] args) throws FileNotFoundException, PegGameException{
         ReadFile read = new ReadFile();
         Scanner readPath = new Scanner(System.in);
         System.out.println("Please, enter the path of the file: ");
