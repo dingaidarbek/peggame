@@ -18,7 +18,7 @@ public class Location_test {
         String locationString = location.toString();
 
         // analyze 
-        String expectedString = " The peg is at row, " + row +  " ." +  "The peg is at coloumn, " + col;
+        String expectedString = "( row " + row +  ", col" + col + ")";
         assertEquals(expectedString, locationString);
     }
     

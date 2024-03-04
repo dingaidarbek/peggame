@@ -204,6 +204,8 @@ public class PegGameSquare implements PegGame {
                 throw new PegGameException("Impossible move");
             }
     }
+
+    // Method to check whether the given move is possible. It checks if the move is in possibleMoves array.
     public boolean moveIsPossible(Move move){
         Collection<Move> possibleMoves = getPossibleMoves();
         return possibleMoves.contains(move);
