@@ -11,7 +11,7 @@ public class PegGameException_test{
         String message = "Testing message";
 
         // invoke 
-        // testing the constructor in PegGameexception class
+        // testing the constructor in PegGameException class
         PegGameException exception = new PegGameException(message);
 
         // analyze

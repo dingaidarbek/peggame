@@ -18,7 +18,7 @@ public class Location_test {
         String locationString = location.toString();
 
         // analyze 
-        String expectedString = "( row " + row +  ", col" + col + ")";
+        String expectedString = "(row" + row +  ", col" + col + ")";
         assertEquals(expectedString, locationString);
     }
     

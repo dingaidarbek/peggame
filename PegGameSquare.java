@@ -230,4 +230,7 @@ public class PegGameSquare implements PegGame {
         }
         return numberOfPegs;
     }
+    public void setGameBoard(char[][] array){
+        this.gameBoard = array;
+    }
 }

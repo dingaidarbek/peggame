@@ -10,9 +10,9 @@ public class GameState_test {
         // setup
         // these are the expected outputs 
         String NOT_STARTED_Description = "No moves have been made yet!";
-        String IN_PROGRESS_Description = "at least one move has been made and game has not ended yet.";
-        String STALEMATE_Description = "two or more pegs remain on the board, but there are no more valid moves.";
-        String WON_Description = "the game has been played to completion and ended in victory. There is one peg remaining on the board.";
+        String IN_PROGRESS_Description = "At least one move has been made and game has not ended yet.";
+        String STALEMATE_Description = "Two or more pegs are remaining on the board, but there are no more valid moves.";
+        String WON_Description = "Victory!";
         
         // invoke
         // in this step we are getting the actual descriptions from GameState to test them 

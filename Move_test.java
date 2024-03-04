@@ -18,7 +18,7 @@ public class Move_test {
         // analyze 
         assertEquals(from, move.getFrom());
         assertEquals(to, move.getTo());
-        assertEquals("The peg moved from to ", move.toString()); // making sure that toString method returns the expected representation
+        assertEquals("Peg moves from " + from +" to " + to, move.toString()); // making sure that toString method returns the expected representation
     }
 
     @Test

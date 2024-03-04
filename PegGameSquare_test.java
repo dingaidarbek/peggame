@@ -1,49 +1,60 @@
 package peggame;
 
-import java.beans.Transient;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.util.Collection;
 
 import org.junit.Test;
 
-import peggame.GameState;
-import peggame.Location;
-import peggame.Move;
-
 public class PegGameSquare_test {
     @Test
-    public void test_PossibleMoves(){
+    public void test_PossibleMoves() throws PegGameException{
         // setup
-        PegGameSquare gameBoard = new PegGameSquare(5); // creating a 5x5 board
+        PegGameSquare gameBoard = new PegGameSquare(2); // creating a 3x3 board
+        char[][] exampleBoard = {{'o','o','-'},
+                                 {'o','o','-'},
+                                 {'o','o','-'}};
+        gameBoard.setGameBoard(exampleBoard);             
         // invoke
-        gameBoard.makeMove(new Move(new Location(2, 2), new Location(2, 0))); // Move the pegs to a different location
-        gameBoard.makeMove(new Move(new Location(3, 3), new Location(4, 3)));
 
         Collection<Move> possibleMoves = gameBoard.getPossibleMoves();
         // analyze
-        assertEquals(4, possibleMoves.size()); // checking if the number of possible moves is equal to 4
+        assertEquals(5, possibleMoves.size()); // checking if the number of possible moves is equal to 4
 
     }
 
     @Test
-    public void test_MakeMove(){
+    public void test_MakeMove() throws PegGameException{
         // setup
-        PegGameSquare gameBoard = new PegGameSquare(5); // creating a 5x5 board
+        PegGameSquare gameBoard = new PegGameSquare(2); // creating a 3x3 board
+        char[][] exampleBoard = {{'o','o','-'},
+                                 {'o','o','-'},
+                                 {'o','o','-'}};
+        gameBoard.setGameBoard(exampleBoard);        
         // invoke
-        gameBoard.makeMove(new Move(new Location(2, 2), new Location(0, 0))); // Move the pegs to a different location
+        gameBoard.makeMove(new Move(new Location(0, 0), new Location(2, 2))); // Move the pegs to a different location
         // analyze 
         assertEquals(GameState.IN_PROGRESS, gameBoard.getGameState());
-        assertEquals(4, gameBoard.pegsLeft());
+        assertEquals(5, gameBoard.pegsLeft());
+        assertTrue(exampleBoard[0][0] == '-');
+        assertTrue(exampleBoard[1][1] == '-');
+        assertTrue(exampleBoard[2][2] == 'o');
     }
 
     @Test
-    public void test_PegsLeft(){
+    public void test_PegsLeft() throws PegGameException{
         // setup
-        PegGameSquare gameBoard = new PegGameSquare(5); // creating a 5x5 board
+        PegGameSquare gameBoard = new PegGameSquare(2); // creating a 3x3 board
+        char[][] exampleBoard = {{'o','o','-'},
+                                 {'o','o','-'},
+                                 {'o','o','-'}};
+        gameBoard.setGameBoard(exampleBoard);     
         // invoke
-        gameBoard.makeMove(new Move(new Location(2, 2), new Location(0, 0))); // Move the pegs to a different location
-        gameBoard.makeMove(new Move(new Location(3, 3), new Location(4, 4)));
+        int expectedNumberOfPegs = 6;
+        int realNumberOfPegs = gameBoard.pegsLeft();
         // analyze
-        assertEquals(4, gameBoard.pegsLeft()); // checking to see if the expected pegs left match the actual
+        assertEquals(expectedNumberOfPegs, realNumberOfPegs); // checking to see if the expected pegs left match the actual
     }
     
 
