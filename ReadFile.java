@@ -28,7 +28,7 @@ public class ReadFile {
         return readedFile;
     }
     catch (FileNotFoundException e){
-        return new PegGameSquare(0);
+        throw new FileNotFoundException();
     }
     }
     

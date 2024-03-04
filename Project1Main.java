@@ -26,7 +26,7 @@ public class Project1Main {
           PegGameCLI.startGame(game); // Start game
         }
         catch (FileNotFoundException e){ // If user enters incorrect path, an exception is thrown
-          System.out.println("Please, enter correct path of the file.");
+          System.out.println("Please, enter correct path of the file and try again.");
         }
         readPath.close();
     }
