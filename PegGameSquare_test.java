@@ -12,10 +12,10 @@ public class PegGameSquare_test {
     public void test_PossibleMoves() throws PegGameException{
         // setup
         PegGameSquare gameBoard = new PegGameSquare(2); // creating a 3x3 board
-        char[][] exampleBoard = {{'o','o','-'},
+        char[][] exampleBoard = {{'o','o','-'}, // Creating values to be inserted to the board
                                  {'o','o','-'},
                                  {'o','o','-'}};
-        gameBoard.setGameBoard(exampleBoard);             
+        gameBoard.setGameBoard(exampleBoard); // Inserting values to the created board
         // invoke
 
         Collection<Move> possibleMoves = gameBoard.getPossibleMoves();
@@ -28,16 +28,16 @@ public class PegGameSquare_test {
     public void test_MakeMove() throws PegGameException{
         // setup
         PegGameSquare gameBoard = new PegGameSquare(2); // creating a 3x3 board
-        char[][] exampleBoard = {{'o','o','-'},
+        char[][] exampleBoard = {{'o','o','-'}, // Creating values to be inserted to the board
                                  {'o','o','-'},
                                  {'o','o','-'}};
-        gameBoard.setGameBoard(exampleBoard);        
+        gameBoard.setGameBoard(exampleBoard); // Inserting values to the created board
         // invoke
         gameBoard.makeMove(new Move(new Location(0, 0), new Location(2, 2))); // Move the pegs to a different location
         // analyze 
         assertEquals(GameState.IN_PROGRESS, gameBoard.getGameState());
         assertEquals(5, gameBoard.pegsLeft());
-        assertTrue(exampleBoard[0][0] == '-');
+        assertTrue(exampleBoard[0][0] == '-'); // Check if move is done correctly
         assertTrue(exampleBoard[1][1] == '-');
         assertTrue(exampleBoard[2][2] == 'o');
     }
@@ -46,10 +46,10 @@ public class PegGameSquare_test {
     public void test_PegsLeft() throws PegGameException{
         // setup
         PegGameSquare gameBoard = new PegGameSquare(2); // creating a 3x3 board
-        char[][] exampleBoard = {{'o','o','-'},
+        char[][] exampleBoard = {{'o','o','-'}, // Creating values to be inserted to the board
                                  {'o','o','-'},
                                  {'o','o','-'}};
-        gameBoard.setGameBoard(exampleBoard);     
+        gameBoard.setGameBoard(exampleBoard); // Inserting values to the created board
         // invoke
         int expectedNumberOfPegs = 6;
         int realNumberOfPegs = gameBoard.pegsLeft();

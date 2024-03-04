@@ -9,9 +9,9 @@ public class GameState_test {
     public void GameStateDescriptions(){ //testing the descriptions of our enum GameState
         // setup
         // these are the expected outputs 
-        String NOT_STARTED_Description = "No moves have been made yet!";
-        String IN_PROGRESS_Description = "At least one move has been made and game has not ended yet.";
-        String STALEMATE_Description = "Two or more pegs are remaining on the board, but there are no more valid moves.";
+        String NOT_STARTED_Description = "Not Started. No moves have been made yet!";
+        String IN_PROGRESS_Description = "In Progress. At least one move has been made and game has not ended yet.";
+        String STALEMATE_Description = "Stalemate. Two or more pegs are remaining on the board, but there are no more valid moves.";
         String WON_Description = "Victory!";
         
         // invoke

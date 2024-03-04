@@ -35,15 +35,15 @@ public class Location_test {
 
         int row_3 = 3;
         int col_3 = 5;
-        Location location_3 = new Location(row_3, col_3);
+        Location location_3 = new Location(row_3, col_3); 
 
         // invoke
         boolean Equal = location_1.equals(location_2);
         boolean Equal_1 = location_2.equals(location_3);
 
         // analyze 
-        assertTrue(Equal);
-        assertFalse(Equal_1);
+        assertTrue(Equal); // location_1 and location_2 are equal, because have same coordinates
+        assertFalse(Equal_1); // location_2 and location_3 are not equal, because have different coordinates
     }
 
 }
