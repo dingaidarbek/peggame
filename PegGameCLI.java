@@ -1,4 +1,5 @@
-package peggame;
+package PEGGAME;
+
 
 import java.util.InputMismatchException;
 import java.util.Scanner;

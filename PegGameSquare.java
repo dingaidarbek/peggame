@@ -1,4 +1,5 @@
-package peggame;
+package PEGGAME;
+
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -16,6 +17,9 @@ public class PegGameSquare implements PegGame {
     private int length;
     private char[][] gameBoard;
     private GameState gameState;
+
+    public int getLength(){return length;}
+    public char[][] getGameBoard(){return gameBoard;}
 
 
     // constructor

@@ -1,4 +1,5 @@
-package peggame;
+package PEGGAME;
+
 
 import java.io.File;
 import java.io.FileNotFoundException;

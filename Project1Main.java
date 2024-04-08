@@ -1,4 +1,5 @@
-package peggame;
+package PEGGAME;
+
 
 import java.io.FileNotFoundException;
 import java.util.Scanner;

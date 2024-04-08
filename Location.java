@@ -1,4 +1,5 @@
-package peggame;
+package PEGGAME;
+
 /**
  * Location class is used to locate a specific row and column on The Peg Game Board;
  * it contains a constructor that takes two parameters to specify the location.

@@ -1,5 +1,4 @@
-package peggame;
-
+package PEGGAME;
 public class Move{
     private Location from;
     private Location to;
