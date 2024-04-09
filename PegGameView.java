@@ -46,10 +46,10 @@ public class PegGameView extends Application {
     
         // Creating the board
         GridPane gridPane = new GridPane();
-        gridPane.setPadding(new Insets(10));
+        gridPane.setPadding(new Insets(length+1));
         gridPane.setAlignment(Pos.CENTER);
-        for(int col=0; col<length; col++) {
-            for(int row=0; row<length; row++) {  
+        for(int col=1; col<=length; col++) {
+            for(int row=1; row<=length; row++) {  
                 char value = b[row][col];  
                 if(value == '-'){
                     Label empty = new Label("-");
