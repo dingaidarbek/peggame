@@ -15,9 +15,9 @@ import javafx.stage.Stage;
 
 public class PegGameView extends Application {
 
-    private static Label makeLabel(String text, Color foreground){
+    private static Label makeLabel(String text, int size, Color foreground){
         Label myLabel = new Label(text);
-        myLabel.setFont(new Font("Times New Roman", 24));
+        myLabel.setFont(new Font("Times New Roman", size));
         myLabel.setTextFill(foreground);
         myLabel.setPadding(new Insets(10));
         return myLabel;
@@ -31,8 +31,8 @@ public class PegGameView extends Application {
 
         VBox vbox= new VBox();
         vbox.setAlignment(Pos.CENTER);
-        Label message = makeLabel("Welcome To The Peg Game!", Color.BLACK);
-        Label prompt = makeLabel("Enter the path of the board: ", Color.BLACK);
+        Label message = makeLabel("Welcome To The Peg Game!", 36,  Color.BLACK);
+        Label prompt = makeLabel("Enter the path of the board: ", 24, Color.BLACK);
         TextField path = new TextField();
         //vbox.getChildren().addAll(message, prompt, path);
 
@@ -52,11 +52,13 @@ public class PegGameView extends Application {
             for(int row=1; row<=length; row++) {  
                 char value = b[row][col];  
                 if(value == '-'){
-                    Label empty = new Label("-");
+                    Label empty = makeLabel("-", 24,  Color.red);
+                    empty.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
                     gridPane.add(empty, col, row);
 
                 } else {
-                    Label peg = new Label("o");
+                    Label peg = makeLabel("o", 24,  Color.red);
+                    peg.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
                     gridPane.add(peg, col, row);
                 }
            
