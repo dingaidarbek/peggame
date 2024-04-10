@@ -33,7 +33,9 @@ public class PegGameView extends Application {
         vbox.setAlignment(Pos.CENTER);
         Label message = makeLabel("Welcome To The Peg Game!", 36,  Color.BLACK);
         Label prompt = makeLabel("Enter the path of the board: ", 24, Color.BLACK);
+        String gs = (String)(getGameState());
         TextField path = new TextField();
+        Label state = makeLabel("current state of the game: " + gs, 24, Color.BLACK);
         //vbox.getChildren().addAll(message, prompt, path);
 
 
@@ -52,12 +54,12 @@ public class PegGameView extends Application {
             for(int row=1; row<=length; row++) {  
                 char value = b[row][col];  
                 if(value == '-'){
-                    Label empty = makeLabel("-", 24,  Color.red);
+                    Label empty = makeLabel("-", 24,  Color.RED);
                     empty.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
                     gridPane.add(empty, col, row);
 
                 } else {
-                    Label peg = makeLabel("o", 24,  Color.red);
+                    Label peg = makeLabel("o", 24,  Color.RED);
                     peg.setBackground(new Background(new BackgroundFill(Color.BLACK, CornerRadii.EMPTY, Insets.EMPTY)));
                     gridPane.add(peg, col, row);
                 }
@@ -65,7 +67,7 @@ public class PegGameView extends Application {
          }
  }
 
-    vbox.getChildren().addAll(message, prompt, path, gridPane);
+    vbox.getChildren().addAll(message, prompt, path, state, gridPane);
         Scene scene = new Scene(vbox, 300, 500);
 
         primaryStage.setScene(scene);
