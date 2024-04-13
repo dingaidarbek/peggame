@@ -78,6 +78,7 @@ public class PegGameView extends Application {
             }
         }
 
+
         // puting all the controls into the vertical box.
         vbox.getChildren().addAll(message, prompt, path, state, gridPane);
 
@@ -87,8 +88,8 @@ public class PegGameView extends Application {
         primaryStage.setScene(scene);
         primaryStage.show();
     }
+    
+    // getter for the game board we created using gridpane layout
+    public GridPane getGameBoardGridpane(){return gridPane;}
 
-    public static void main(String[] args){
-        launch(args);
-    }
 }
