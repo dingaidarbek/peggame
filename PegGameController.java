@@ -24,25 +24,8 @@ public class PegGameController {
     private Location selectedLocation;
 
 
-    public static PegGameSquare startGame(String path){
-        try{
-            model = ReadFile.readFile(path);
-            return model;
-        }
-        catch (FileNotFoundException e){
-            return null;
-        }
-        // iterate through each cell in the grid pane
-        // for (int row = 0; row < model.getLength(); row++) {
-        //     for (int col = 0; col < model.getLength(); col++) {
-        //         // get each cell as a label from grid pane based on its location
-        //         Label cell = (Label) gridPane.getChildren().get(row * model.getLength() + col);
-        //         int finalRow = row;
-        //         int finalCol = col;
-        //         // when the user clicks on the cell the location of the cell is passed
-        //         // cell.setOnMouseClicked(e -> handleCellClick(finalRow, finalCol, e));
-        //     }
-        // }
+    public static PegGameSquare startGame1(String path){
+        
     }
 
     private void handleCellClick(int row, int col, MouseEvent event) {
@@ -53,7 +36,7 @@ public class PegGameController {
         // Second click - attempt move
         try {
             Move move = new Move(selectedLocation, new Location(row, col));
-            if (model.isValidMove(move)) {
+            if (model.moveIsPossible(move)) {
                 model.makeMove(move);
                 view.updateBoard(model); // update the board in the view
                 view.highlightCell(selectedLocation.getRow(), selectedLocation.getCol(), false); // don't highlight the selected cell

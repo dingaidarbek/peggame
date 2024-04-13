@@ -1,7 +1,8 @@
 package peggame;
 
-public class PegGameGUI {
+public class PegGameGUI{
     public static void main(String[] args) {
-        PegGameView.launch(args);
+        PegGameView.startGame();
     }
+
 }
