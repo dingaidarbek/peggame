@@ -1,4 +1,4 @@
-package PEGGAME;
+package peggame;
 
 /**
  * Location class is used to locate a specific row and column on The Peg Game Board;

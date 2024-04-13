@@ -1,4 +1,4 @@
-package PEGGAME;
+package peggame;
 
 
 import java.io.File;
@@ -7,7 +7,7 @@ import java.util.Scanner;
 
 public class ReadFile {
 
-    public PegGameSquare readFile(String path) throws FileNotFoundException{
+    public static PegGameSquare readFile(String path) throws FileNotFoundException{
         try{
         File file = new File(path);
         Scanner scanner = new Scanner(file);

@@ -1,4 +1,4 @@
-package PEGGAME;
+package peggame;
 
 
 import static org.junit.Assert.assertEquals;

@@ -1,4 +1,4 @@
-package PEGGAME;
+package peggame;
 
 
 import java.util.Collection;

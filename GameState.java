@@ -1,4 +1,4 @@
-package PEGGAME;
+package peggame;
 
 /**
  * Enumeration class that contains possible game state of The Peg Game.
