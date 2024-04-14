@@ -4,19 +4,25 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class MoveMaker implements EventHandler<ActionEvent>{
-    int row;
-    int col;
-    PegGameView view;
-    Location selectedLocation;
-    Button button;
-    PegGameSquare game;
-    boolean havePeg;
+/*
+ * This class provide the implementation of making moves on table
+ */
 
-    private static Image imageNoPeg = new Image ("file:pegs/emptyPeg.png");
-    private static Image imagePeg = new Image ("file:pegs/fullPeg.png");
-    private static Image imageSelectedPeg = new Image ("file:pegs/selectedPeg.png");
+public class MoveMaker implements EventHandler<ActionEvent>{
+    protected int row;
+    protected int col;
+    protected PegGameView view;
+    protected Location selectedLocation;
+    protected Button button;
+    protected PegGameSquare game;
+    protected boolean havePeg;
+
+    // Images: square without peg, square with peg, square with selected peg
+    protected static Image imageNoPeg = new Image ("file:pegs/emptyPeg.png");
+    protected static Image imagePeg = new Image ("file:pegs/fullPeg.png");
+    protected static Image imageSelectedPeg = new Image ("file:pegs/selectedPeg.png");
     
+    //Constructor
     MoveMaker(int row, int col, PegGameView view, Button button, PegGameSquare game, boolean havePeg){
         this.row = row;
         this.col = col;
@@ -26,37 +32,42 @@ public class MoveMaker implements EventHandler<ActionEvent>{
         this.havePeg = havePeg;
     }
 
+    // When event happens (button is clicked), this method is called
     @Override
     public void handle(ActionEvent event) {
-        selectedLocation = PegGameView.selectedLocation;
+        selectedLocation = PegGameView.selectedLocation; // Take the location of the clicked button
         if (selectedLocation == null && havePeg){
-            PegGameView.selectedLocation = new Location(row,col);
+            /*If there is peg on the location and it is the first click create */ 
+            PegGameView.selectedLocation = new Location(row,col); 
+            
             if (game.getGameBoard()[PegGameView.selectedLocation.getRow()][PegGameView.selectedLocation.getCol()] == 'o'){
+                // Make it visually different from other pegs
                 button.setGraphic(new ImageView(imageSelectedPeg));
                 PegGameView.temp = button;
             }
         }
         else{
             try{
-                // System.out.println("Sel Loc3: " + selectedLocation);
-                view.makeMove(selectedLocation.getRow(), selectedLocation.getCol(), row, col);
-                PegGameView.temp.setGraphic(new ImageView(imageNoPeg));
-                view.game.setGameState(GameState.IN_PROGRESS);
-                view.updateGameState();
+                // If selectedLocation is not null, that means it is the second click (place where peg should move to)
+                view.makeMove(selectedLocation.getRow(), selectedLocation.getCol(), row, col); // Check if move is valid and make it if it is
+                PegGameView.temp.setGraphic(new ImageView(imageNoPeg)); // If move is made, delete peg from initial location
+                view.game.setGameState(GameState.IN_PROGRESS); // Move is made, then change the GameState
+                view.updateGameState(); // Update the GameState on the screen
             }
-            catch(PegGameException e){
+            catch(PegGameException e){ // If the move is impossible, unselect the initial peg
                 PegGameView.temp.setGraphic(new ImageView(imagePeg));
             }
-            if (game.getPossibleMoves().size() == 0){
-                if(game.pegsLeft() == 1){
+            if (game.getPossibleMoves().size() == 0){ // If there are no moves, that leads to either win or stalemate
+                if(game.pegsLeft() == 1){ // Only one peg left => win
                     game.setGameState(GameState.WON);
                 }
-                else{
+                else{// Else => stalemate
                     game.setGameState(GameState.STALEMATE);
                 }
-                view.updateGameState();
+                view.updateGameState();// Update the GameState on the screen
+
             }
-            PegGameView.selectedLocation = null;
+            PegGameView.selectedLocation = null; // Clear the saved location
         }
     }
 }
