@@ -74,10 +74,26 @@ public class PegGameView extends Application{
                 }
 
                 gameState = new Label(game.getGameState().toString());
-                Button saveButton = new Button("Save game");
+                Button saveButton = new Button("Save");
 
                 TextField fileName = new TextField();
                 fileName.setMaxWidth(500);
+
+                Label saveLabel = new Label("Enter the name of the file to save:");
+                saveLabel.setPadding(new Insets(5));
+
+                saveLabel.setVisible(false);
+                saveButton.setVisible(false);
+                fileName.setVisible(false);
+
+                
+                Button openSave = new Button("Save game");
+                openSave.setOnAction(d -> {
+                    saveLabel.setVisible(true);
+                    saveButton.setVisible(true);
+                    fileName.setVisible(true);
+                    openSave.setVisible(false);
+                });
 
                 saveButton.setOnAction(new SaveGame(fileName, this, game, warning));
 
@@ -85,14 +101,11 @@ public class PegGameView extends Application{
                 exitButton.setPadding(new Insets(5));
 
                 exitButton.setOnAction(new ExitGame(primaryStage));
-
-                Label saveLabel = new Label("Enter the name of the file to save:");
-                saveLabel.setPadding(new Insets(5));
                 
                 HBox hbox = new HBox();
                 hbox.setAlignment(Pos.CENTER);
                 hbox.setPadding(new Insets(5));
-                hbox.getChildren().addAll(saveButton, exitButton);
+                hbox.getChildren().addAll(openSave, saveButton, exitButton);
 
                 vbox.getChildren().addAll(warning, gameState, gridPane, saveLabel, fileName, hbox);
                 vbox.setAlignment(Pos.CENTER);
@@ -159,11 +172,5 @@ public class PegGameView extends Application{
 
     void updateGameState(){
         gameState.setText(game.getGameState().toString());
-    }
-
-
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }
