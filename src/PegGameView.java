@@ -35,6 +35,7 @@ public class PegGameView extends Application{
     public static Location selectedLocation;
     Label gameState = new Label(game.getGameState().toString());
     public static Button temp;
+    Label warning;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -65,7 +66,8 @@ public class PegGameView extends Application{
 
                 int length = game.getLength();
 
-                Label warning = new Label("");
+                warning = makeLabel("Impossible move!", 24, Color.BLUE);
+                warning.setVisible(false);
 
                 for (int row = 0; row < length; row ++){
                     for (int col = 0; col < length; col++){
@@ -135,9 +137,11 @@ public class PegGameView extends Application{
 
     void makeMove(int fromRow, int fromCol, int toRow, int toCol) throws PegGameException{
         try {
+            warning.setVisible(false);
             game.makeMove(new Move(new Location(fromRow, fromCol), new Location(toRow, toCol)));            
         } 
         catch (PegGameException e) {
+            warning.setVisible(true);
             throw new PegGameException("Impossible move");
         }
         for (int rows = 0; rows < LENGTH; rows ++){
