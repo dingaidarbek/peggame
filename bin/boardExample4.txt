@@ -1,6 +1,4 @@
-4
-oo.oo
-oo.oo
-oo.oo
-oo.oo
-oo.oo
+2
+o.o
+o.o
+o.o

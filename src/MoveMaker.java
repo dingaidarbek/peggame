@@ -43,7 +43,6 @@ public class MoveMaker implements EventHandler<ActionEvent>{
                 view.updateGameState();
             }
             catch(PegGameException e){
-                System.out.println("Invalid move");
                 PegGameView.temp.setGraphic(new ImageView(imagePeg));
             }
             if (game.getPossibleMoves().size() == 0){

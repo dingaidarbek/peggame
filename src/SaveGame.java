@@ -29,7 +29,12 @@ public class SaveGame extends PegGameView implements EventHandler <ActionEvent>{
             pw.println(game.getLength());
             for(int row = 0; row < game.getLength(); row++) {
                 for(int col = 0; col < game.getLength(); col++){
+                    if(game.getGameBoard()[row][col] == 'o'){
                     pw.print(game.getGameBoard()[row][col]);
+                    }
+                    else{
+                        pw.print(".");
+                    }
                 }
                 pw.println();
             }

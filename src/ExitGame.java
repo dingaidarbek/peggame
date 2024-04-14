@@ -1,18 +1,15 @@
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.stage.Stage;
 
 public class ExitGame implements EventHandler<ActionEvent>{
-    PegGameView view;
-    ExitGame(PegGameView view){
-        this.view = view;
+    Stage stage;
+    ExitGame(Stage stage){
+        this.stage = stage;
     }
     @Override
     public void handle(ActionEvent arg0) {
-        try {
-            view.stop();
-        } catch (Exception e) {
-
-        }
+        PegGameView.exitProgram(stage);
     }
     
 }

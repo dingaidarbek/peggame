@@ -1,3 +1,5 @@
+import java.io.FileNotFoundException;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -7,20 +9,24 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BackgroundPosition;
 import javafx.scene.layout.BackgroundRepeat;
 import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class PegGameView extends Application{
 
     private static Image imageNoPeg = new Image ("file:pegs/emptyPeg.png");
     private static Image imagePeg = new Image ("file:pegs/fullPeg.png");
-    private static Image imageSelectedPeg = new Image ("file:pegs/selectedPeg.png");
 
 
     PegGameSquare game = new PegGameSquare(4);
@@ -34,30 +40,83 @@ public class PegGameView extends Application{
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("The Peg Game");
         VBox vbox = new VBox();
-        String boardPath = "C:\\Users\\Dimash\\repos\\gcis124\\Dimash\\peggame\\peggameGUI\\src\\boardExample.txt";
-        game = ReadFile.readFile(boardPath);
-        int length = game.getLength();
-        Label warning = new Label("");
-        for (int row = 0; row < length; row ++){
-            for (int col = 0; col < length; col++){
-                gridPane.add(makePegButton(row, col),col, row);
-            }
-        }
-        gameState = new Label(game.getGameState().toString());
-        Button saveButton = new Button("Save game");
-        TextField fileName = new TextField();
-        Button exitButton = new Button("Exit");
-        vbox.getChildren().addAll(warning, gameState, gridPane, fileName, saveButton, exitButton);
         vbox.setAlignment(Pos.CENTER);
-        gridPane.setAlignment(Pos.CENTER);
-        Scene pathScene = new Scene (vbox,1200, 700);
-        primaryStage.setScene(pathScene);
+
+        Label message = makeLabel("Welcome To The Peg Game!", 36,  Color.BLACK);
+        Label prompt = makeLabel("Enter the path of the board: ", 24, Color.BLACK);
+        TextField path = new TextField();
+        path.setMaxWidth(500);
+        // path.setMaxSize(100, 100);
+        Button startGame = new Button("Start");
+        vbox.getChildren().addAll(message, prompt, path, startGame);
+        vbox.setBackground(new Background(new BackgroundFill(Color.LIGHTGREEN, CornerRadii.EMPTY, new Insets(0))));
+        // adding the vbox into a scene
+        Scene startScene = new Scene(vbox, 1500, 800);
+        primaryStage.setMaximized(true);;
+        primaryStage.setScene(startScene);
         primaryStage.show();
-        saveButton.setOnAction(new SaveGame(fileName, this, game, warning));
-        exitButton.setOnAction(new ExitGame(this));
+
+        startGame.setOnAction(e ->{
+            String boardPath = path.getText();
+            try {
+                game = ReadFile.readFile(boardPath);
+                startScene.getWindow();
+                vbox.getChildren().clear();
+
+                int length = game.getLength();
+
+                Label warning = new Label("");
+
+                for (int row = 0; row < length; row ++){
+                    for (int col = 0; col < length; col++){
+                        gridPane.add(makePegButton(row, col),col, row);
+                    }
+                }
+
+                gameState = new Label(game.getGameState().toString());
+                Button saveButton = new Button("Save game");
+
+                TextField fileName = new TextField();
+                fileName.setMaxWidth(500);
+
+                saveButton.setOnAction(new SaveGame(fileName, this, game, warning));
+
+                Button exitButton = new Button("Exit");
+                exitButton.setPadding(new Insets(5));
+
+                exitButton.setOnAction(new ExitGame(primaryStage));
+
+                Label saveLabel = new Label("Enter the name of the file to save:");
+                saveLabel.setPadding(new Insets(5));
+                
+                HBox hbox = new HBox();
+                hbox.setAlignment(Pos.CENTER);
+                hbox.setPadding(new Insets(5));
+                hbox.getChildren().addAll(saveButton, exitButton);
+
+                vbox.getChildren().addAll(warning, gameState, gridPane, saveLabel, fileName, hbox);
+                vbox.setAlignment(Pos.CENTER);
+
+                gridPane.setAlignment(Pos.CENTER);
+
+                primaryStage.setScene(startScene);
+                primaryStage.show();
+            } 
+            catch (FileNotFoundException e1) {
+                prompt.setText("Invalid path. Please, try again");
+            }
+
+    });
     }
-    void highlightPeg(int row, int col){
-        
+    static void exitProgram(Stage stage){
+        stage.close();
+    }
+    private Label makeLabel(String text, int size, Color foreground){
+        Label myLabel = new Label(text);
+        myLabel.setFont(new Font("Times New Roman", size));
+        myLabel.setTextFill(foreground);
+        myLabel.setPadding(new Insets(10));
+        return myLabel;
     }
 
 
