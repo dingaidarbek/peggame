@@ -130,7 +130,7 @@ public class PegGameView extends Application{
         Label myLabel = new Label(text);
         myLabel.setFont(new Font("Times New Roman", size));
         myLabel.setTextFill(foreground);
-        myLabel.setPadding(new Insets(10));
+        myLabel.setPadding(new Insets(5));
         return myLabel;
     }
 
@@ -161,15 +161,16 @@ public class PegGameView extends Application{
         BackgroundRepeat.NO_REPEAT, 
         BackgroundPosition.CENTER,
         BackgroundSize.DEFAULT)));
-
+        boolean havePeg = false;
         if (game.getGameBoard()[row][col] == 'o'){
             ImageView view = new ImageView(imagePeg);
             button.setGraphic(view);
+            havePeg = true;
         }
 
         button.setPadding(new Insets(0));
         button.setPrefSize(134, 134);
-        button.setOnAction(new MoveMaker(row, col, this, button, game));
+        button.setOnAction(new MoveMaker(row, col, this, button, game, havePeg));
         return button;
     }
 

@@ -5,3 +5,4 @@ public class PegGameGUI {
         Application.launch(PegGameView.class, null);
     }
 }
+    

@@ -11,23 +11,25 @@ public class MoveMaker implements EventHandler<ActionEvent>{
     Location selectedLocation;
     Button button;
     PegGameSquare game;
+    boolean havePeg;
 
     private static Image imageNoPeg = new Image ("file:pegs/emptyPeg.png");
     private static Image imagePeg = new Image ("file:pegs/fullPeg.png");
     private static Image imageSelectedPeg = new Image ("file:pegs/selectedPeg.png");
     
-    MoveMaker(int row, int col, PegGameView view, Button button, PegGameSquare game){
+    MoveMaker(int row, int col, PegGameView view, Button button, PegGameSquare game, boolean havePeg){
         this.row = row;
         this.col = col;
         this.view = view;
         this.button = button;
         this.game = game;
+        this.havePeg = havePeg;
     }
 
     @Override
     public void handle(ActionEvent event) {
         selectedLocation = PegGameView.selectedLocation;
-        if (selectedLocation == null){
+        if (selectedLocation == null && havePeg){
             PegGameView.selectedLocation = new Location(row,col);
             if (game.getGameBoard()[PegGameView.selectedLocation.getRow()][PegGameView.selectedLocation.getCol()] == 'o'){
                 button.setGraphic(new ImageView(imageSelectedPeg));
